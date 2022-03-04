@@ -11,22 +11,21 @@ import com.prabal.weather.domain.use_case.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.lang.Error
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val getWeatherUseCase: GetWeatherUseCase
+    private val getWeatherUseCase: GetWeatherUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private var _state = mutableStateOf(WeatherState())
     val state: State<WeatherState> = _state
 
-    private var _location = mutableStateOf(LocationState())
-    val location: State<LocationState> = _location
-
-    fun getLocation(q: String) {
-        _location.value = LocationState(q)
+    init {
+        savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { location ->
+            getWeather(location)
+        }
     }
 
     fun getWeather(location: String) {

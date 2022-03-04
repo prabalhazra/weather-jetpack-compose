@@ -89,6 +89,9 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
+    // navigation compose
+    implementation "androidx.navigation:navigation-compose:$rootProject.nav_version"
+
     // coil library
     implementation "io.coil-kt:coil-compose:1.4.0"
 }
